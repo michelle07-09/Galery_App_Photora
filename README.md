@@ -1,23 +1,42 @@
 # Galery App Photora
 
-A lightweight React gallery app with image upload, albums, favorites, and browser storage persistence.
+This repository contains two separate runnable projects:
 
-## What changed
-- Fixed the add button so the visible `+` symbol appears even when icon fonts are not loaded.
-- Added a browser storage fallback using `localStorage` so the app runs in a normal web browser.
-- Configured a Vite React project scaffold for easy local development.
+- `web/` — the web version of the gallery app
+- `app/` — a second app folder with the same app structure in a separate directory
 
 ## Run locally
-1. Install dependencies:
-   ```bash
-   npm install
-   ```
-2. Start the development server:
-   ```bash
-   npm run dev
-   ```
-3. Open the URL shown in the terminal, typically `http://localhost:5173`.
+
+Install dependencies from the root of the repository:
+
+```bash
+npm install
+```
+
+Start the web version:
+
+```bash
+npm run dev:web
+```
+
+Start the app version:
+
+```bash
+npm run dev:app
+```
+
+Build the web version:
+
+```bash
+npm run build:web
+```
+
+Build the app version:
+
+```bash
+npm run build:app
+```
 
 ## Notes
-- The app uses `localStorage` as a fallback if `window.storage` is not available.
-- If you want to publish this repository on GitHub, initialize git, add a remote, and push your branch.
+
+Each folder has its own Vite project configuration, so the app and web versions are kept separate while sharing the same gallery code.

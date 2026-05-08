@@ -1,18 +1,13 @@
 {
   "name": "galery-app-photora",
   "private": true,
-  "type": "module",
+  "workspaces": ["app", "web"],
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
-  },
-  "dependencies": {
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
-  },
-  "devDependencies": {
-    "@vitejs/plugin-react": "^4.3.1",
-    "vite": "^5.4.0"
+    "dev:web": "npm --workspace web run dev",
+    "build:web": "npm --workspace web run build",
+    "preview:web": "npm --workspace web run preview",
+    "dev:app": "npm --workspace app run dev",
+    "build:app": "npm --workspace app run build",
+    "preview:app": "npm --workspace app run preview"
   }
 }
