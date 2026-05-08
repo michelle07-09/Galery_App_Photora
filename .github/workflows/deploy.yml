@@ -25,17 +25,14 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build web and app
+      - name: Build web
         run: |
           npm run build:web
-          npm run build:app
 
       - name: Prepare deployment directory
         run: |
-          mkdir -p deploy/web deploy/app
-          # Pastikan path source ini (web/dist dan app/dist) sudah benar
+          mkdir -p deploy/web
           cp -r web/dist/* deploy/web/
-          cp -r app/dist/* deploy/app/
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4

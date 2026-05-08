@@ -25,5 +25,6 @@ npm run ios:app
 ## Notes
 
 - Uses Expo Image Picker for photo selection.
+- Includes a phone-style launcher screen and camera capture button.
 - Persists gallery data with AsyncStorage.
 - Designed for mobile phone use.

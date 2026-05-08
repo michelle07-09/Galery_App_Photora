@@ -80,6 +80,7 @@ export default function App() {
   const [addToAlbumPhoto, setAddToAlbumPhoto] = useState(null);
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
+  const [showLauncher, setShowLauncher] = useState(true);
 
   useEffect(() => {
     loadData();
@@ -127,6 +128,30 @@ export default function App() {
         id: `${Date.now()}_${Math.random().toString(36).slice(2)}`,
         src: asset.uri,
         name: asset.fileName || "Foto baru",
+        date: new Date().toISOString(),
+        favorite: false,
+      };
+      savePhotos([photo, ...photos]);
+    }
+  };
+
+  const takePhoto = async () => {
+    const permission = await ImagePicker.requestCameraPermissionsAsync();
+    if (permission.status !== "granted") {
+      Alert.alert("Izin ditolak", "Aplikasi memerlukan akses kamera untuk mengambil foto.");
+      return;
+    }
+
+    const result = await ImagePicker.launchCameraAsync({
+      quality: 0.7,
+    });
+
+    if (!result.canceled && result.assets?.length) {
+      const asset = result.assets[0];
+      const photo = {
+        id: `${Date.now()}_${Math.random().toString(36).slice(2)}`,
+        src: asset.uri,
+        name: asset.fileName || "Foto kamera",
         date: new Date().toISOString(),
         favorite: false,
       };
@@ -199,6 +224,30 @@ export default function App() {
     : photos;
   const favoritePhotos = photos.filter((photo) => photo.favorite);
 
+  if (showLauncher) {
+    return (
+      <SafeAreaView style={styles.launchContainer}>
+        <View style={styles.launchPhone}>
+          <View style={styles.launchHeader}>
+            <View style={styles.launchNotch} />
+          </View>
+          <View style={styles.launchContent}>
+            <Text style={styles.launchTitle}>Photora</Text>
+            <Text style={styles.launchSubtitle}>
+              Your phone gallery for memories, albums, and camera capture.
+            </Text>
+            <TouchableOpacity style={styles.launchButton} onPress={() => setShowLauncher(false)}>
+              <Text style={styles.launchButtonText}>Open Gallery</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.launchFooter}>
+            <View style={styles.launchHomeIndicator} />
+          </View>
+        </View>
+      </SafeAreaView>
+    );
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar style="dark" />
@@ -216,9 +265,16 @@ export default function App() {
           </Text>
         </View>
         {tab !== "search" && (
-          <TouchableOpacity style={styles.addButton} onPress={tab === "albums" ? () => setShowNewAlbum(true) : pickImage}>
-            <Text style={styles.addButtonText}>+</Text>
-          </TouchableOpacity>
+          <View style={styles.headerButtons}>
+            <TouchableOpacity style={styles.addButton} onPress={tab === "albums" ? () => setShowNewAlbum(true) : pickImage}>
+              <Text style={styles.addButtonText}>+</Text>
+            </TouchableOpacity>
+            {tab === "library" && (
+              <TouchableOpacity style={styles.cameraButton} onPress={takePhoto}>
+                <Text style={styles.cameraButtonText}>📷</Text>
+              </TouchableOpacity>
+            )}
+          </View>
         )}
       </View>
 
@@ -426,6 +482,92 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: C.bg,
+  },
+  launchContainer: {
+    flex: 1,
+    backgroundColor: "#120B11",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  launchPhone: {
+    width: "92%",
+    maxWidth: 420,
+    aspectRatio: 9 / 16,
+    borderRadius: 40,
+    backgroundColor: "#0E0A10",
+    overflow: "hidden",
+    borderWidth: 1,
+    borderColor: "rgba(255,255,255,0.08)",
+  },
+  launchHeader: {
+    height: 44,
+    alignItems: "center",
+    justifyContent: "center",
+    paddingTop: 8,
+  },
+  launchNotch: {
+    width: 120,
+    height: 6,
+    borderRadius: 4,
+    backgroundColor: "rgba(255,255,255,0.18)",
+  },
+  launchContent: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    paddingHorizontal: 28,
+  },
+  launchTitle: {
+    color: "#FFF",
+    fontSize: 38,
+    fontWeight: "800",
+    marginBottom: 10,
+  },
+  launchSubtitle: {
+    color: "#DDD",
+    fontSize: 16,
+    textAlign: "center",
+    lineHeight: 24,
+    marginBottom: 28,
+  },
+  launchButton: {
+    backgroundColor: C.accent,
+    paddingVertical: 16,
+    paddingHorizontal: 36,
+    borderRadius: 32,
+    marginTop: 10,
+  },
+  launchButtonText: {
+    color: "#FFF",
+    fontSize: 16,
+    fontWeight: "700",
+  },
+  launchFooter: {
+    height: 40,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  launchHomeIndicator: {
+    width: 120,
+    height: 6,
+    borderRadius: 3,
+    backgroundColor: "rgba(255,255,255,0.12)",
+  },
+  headerButtons: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  cameraButton: {
+    width: 42,
+    height: 42,
+    borderRadius: 21,
+    backgroundColor: C.surface2,
+    alignItems: "center",
+    justifyContent: "center",
+    marginLeft: 10,
+  },
+  cameraButtonText: {
+    fontSize: 18,
   },
   header: {
     padding: 20,

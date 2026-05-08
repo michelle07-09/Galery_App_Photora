@@ -9,8 +9,6 @@
     "start:app": "npm --workspace app run start",
     "android:app": "npm --workspace app run android",
     "ios:app": "npm --workspace app run ios",
-    "build:app": "npm --workspace app run web",
-    "build:all": "npm run build:web && npm run build:app",
-    "deploy:pages": "npm run build:all"
+    "deploy:pages": "npm run build:web"
   }
 }

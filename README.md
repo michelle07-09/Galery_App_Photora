@@ -2,8 +2,8 @@
 
 This repository contains two separate runnable projects:
 
-- `web/` — the web version of the gallery app
-- `app/` — a second app folder with the same app structure in a separate directory
+- `web/` — the browser gallery app built with Vite
+- `app/` — the Expo mobile gallery app with a phone-style launcher and camera capture
 
 ## Run locally
 
@@ -31,29 +31,19 @@ Build the web version:
 npm run build:web
 ```
 
-Build the app version:
-
-```bash
-npm run build:app
-```
-
-Build both versions:
-
-```bash
-npm run build:all
-```
-
 ## Deployment
 
 This repository includes a GitHub Actions workflow that builds both `app` and `web` and deploys them to GitHub Pages under the `gh-pages` branch.
 
-After deployment, the apps will be available at:
+After deployment, the web version will be available at:
 
 - `https://michelle07-09.github.io/Galery_App_Photora/web/`
-- `https://michelle07-09.github.io/Galery_App_Photora/app/`
 
-If the workflow is active, pushing changes to `master` will automatically update the deployed pages.
+If the workflow is active, pushing changes to `master` will automatically update the deployed page.
 
 ## Notes
+
+- The `web/` folder is the browser version and is available on GitHub Pages.
+- The `app/` folder is an Expo mobile app designed to run locally via Expo Go on a phone or simulator.
 
 Each folder has its own Vite project configuration, so the app and web versions are kept separate while sharing the same gallery code.
