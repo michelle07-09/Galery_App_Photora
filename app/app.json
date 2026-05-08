@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "Galery App Photora",
+    "slug": "galery-app-photora-app",
+    "version": "1.0.0",
+    "sdkVersion": "49.0.0",
+    "platforms": ["ios", "android", "web"],
+    "jsEngine": "hermes",
+    "assetBundlePatterns": ["**/*"]
+  }
+}

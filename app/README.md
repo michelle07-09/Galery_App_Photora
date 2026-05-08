@@ -1,23 +1,29 @@
-# Galery App Photora
+# Galery App Photora (Expo)
 
-A lightweight React gallery app with image upload, albums, favorites, and browser storage persistence.
-
-## What changed
-- Fixed the add button so the visible `+` symbol appears even when icon fonts are not loaded.
-- Added a browser storage fallback using `localStorage` so the app runs in a normal web browser.
-- Configured a Vite React project scaffold for easy local development.
+This folder contains the Expo mobile version of the gallery app.
 
 ## Run locally
-1. Install dependencies:
-   ```bash
-   npm install
-   ```
-2. Start the development server:
-   ```bash
-   npm run dev
-   ```
-3. Open the URL shown in the terminal, typically `http://localhost:5173`.
+
+Install dependencies from the repository root or inside the `app/` folder:
+
+```bash
+npm install
+cd app
+npm start
+```
+
+Open the project in Expo Go on your phone or simulator.
+
+## Useful commands
+
+```bash
+npm run start:app
+npm run android:app
+npm run ios:app
+```
 
 ## Notes
-- The app uses `localStorage` as a fallback if `window.storage` is not available.
-- If you want to publish this repository on GitHub, initialize git, add a remote, and push your branch.
+
+- Uses Expo Image Picker for photo selection.
+- Persists gallery data with AsyncStorage.
+- Designed for mobile phone use.

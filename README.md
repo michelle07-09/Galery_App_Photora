@@ -19,10 +19,10 @@ Start the web version:
 npm run dev:web
 ```
 
-Start the app version:
+Start the Expo app version:
 
 ```bash
-npm run dev:app
+npm run start:app
 ```
 
 Build the web version:
