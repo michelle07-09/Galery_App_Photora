@@ -8,6 +8,8 @@
     "preview:web": "npm --workspace web run preview",
     "dev:app": "npm --workspace app run dev",
     "build:app": "npm --workspace app run build",
-    "preview:app": "npm --workspace app run preview"
+    "preview:app": "npm --workspace app run preview",
+    "build:all": "npm run build:web && npm run build:app",
+    "deploy:pages": "npm run build:all"
   }
 }

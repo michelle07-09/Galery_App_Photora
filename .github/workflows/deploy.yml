@@ -1,0 +1,45 @@
+name: Deploy App and Web to GitHub Pages
+
+on:
+  push:
+    branches:
+      - master
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build web and app
+        run: |
+          npm run build:web
+          npm run build:app
+
+      - name: Prepare deployment directory
+        run: |
+          mkdir -p deploy/web deploy/app
+          cp -r web/dist/* deploy/web/
+          cp -r app/dist/* deploy/app/
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          publish_dir: ./deploy
+          publish_branch: gh-pages
+          user_name: github-actions[bot]
+          user_email: github-actions[bot]@users.noreply.github.com
+          allow_empty_commit: true
+          commit_message: 'Deploy app and web to GitHub Pages'
+          token: ${{ secrets.GITHUB_TOKEN }}
